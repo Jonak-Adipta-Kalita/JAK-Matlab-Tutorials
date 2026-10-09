@@ -15,4 +15,4 @@ MomentsX = int(int(x*d, x, x1, x2), y, min(soln), max(soln));
 MomentsY = int(int(y*d, x, x1, x2), y, min(soln), max(soln));
 
 COM = [MomentsX / Mass, MomentsY / Mass];
-fprintf("COM is: (%s, %s)\n", COM(1), COM(2))
+fprintf("COM is: (%f, %f)\n", double(COM(1)), double(COM(2)))
