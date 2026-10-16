@@ -1,3 +1,5 @@
+% Using Lagrange Multiplier Method
+
 clc, clear;
 
 syms x y z lambda
@@ -8,15 +10,13 @@ constr = 4*x^2 + y^2 + 4*z^2 - 16;
 gradFunc = gradient(func);
 gradConstr = gradient(constr);
 
-vars = [x y z lambda];
 equations = [gradFunc - lambda * gradConstr ; constr];
-
-[xVal, yVal, zVal, lVal] = solve(equations, vars);
+[xVal, yVal, zVal, lVal] = solve(equations, [x y z lambda]);
 
 crits = [xVal(:), yVal(:), zVal(:)];
-[m, n] = size(crits);
+[m, n] = size(crits); % "m" are the critical points
 
-for i=1:m
+for i = 1:m
     vals(i) = subs(func, [x y z], crits(i,:));
     fprintf("Temperature at (%.2f, %.2f, %.2f) is %.2f%cC\n", crits(i,:), vals(i), char(176))
 end
