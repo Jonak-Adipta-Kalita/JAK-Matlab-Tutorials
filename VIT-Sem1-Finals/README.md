@@ -1,0 +1,1 @@
+- finals of sem1 ;-; gonna get 3 questions, each from 1 ehe
