@@ -1,0 +1,32 @@
+clc, clear, close all;
+
+syms x y
+
+f = 3*y^2 - 2*y^3 - 3*x^2 + 6*x*y;
+
+fx = diff(f, x);
+fy = diff(f, y);
+fxx = diff(fx, x);
+fyy = diff(fy, y);
+fxy = diff(fx, y);
+
+[critsX, critsY] = solve([fx, fy], [x, y]);
+crits = [critsX(:), critsY(:)];
+
+[m, n] = size(crits);
+
+hessian = det([fxx fxy; fxy fyy]);
+
+for i = 1:m
+    valF = subs(f, [x y], crits(i, :));
+    valH = subs(hessian, [x y], crits(i, :));
+    valFxx = subs(fxx, [x y], crits(i, :));
+
+    if valH > 0 && valFxx < 0
+        fprintf("Local Maximum at (%.2f, %.2f) of %.2f\n", crits(i, :), valF)
+    elseif valH > 0 && valFxx > 0
+        fprintf("Local Minimum at (%.2f, %.2f) of %.2f\n", crits(i, :), valF)
+    elseif valH < 0
+        fprintf("Saddle Point at (%.2f, %.2f) of %.2f\n", crits(i, :), valF)
+    end
+end
